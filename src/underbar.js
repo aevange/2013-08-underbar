@@ -78,7 +78,7 @@ var _ = { };
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, iterator) {
     var array = [];
-    _.each(collection, function(value, i, c) {
+    _.each(collection, function(value) {
       if(iterator(value)) {
         array.push(value);
       }
