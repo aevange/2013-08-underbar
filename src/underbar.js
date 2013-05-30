@@ -37,7 +37,7 @@ var _ = { };
         return array;
       } else {
         for(var i = n; i > 0; i--){
-          rArray.unshift(array[i]); //depending on what is wanted, may need to chenge unshift to push
+          rArray.unshift(array[i]);
         }
         return rArray;
       }
@@ -49,6 +49,15 @@ var _ = { };
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
   _.each = function(collection, iterator) {
+    if (collection.isArray){
+      for (var i = 0; i <collection.length; i++) {
+        iterator(collection[i], i, collection);
+      }
+    } else {
+      for (var prop in collection) {
+        iterator(collection[prop], prop, collection);
+      }
+    }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
