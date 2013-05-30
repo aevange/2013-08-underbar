@@ -31,6 +31,19 @@ var _ = { };
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
+    if(n !== undefined) {
+      var rArray =[];
+      if (array.length < n) {
+        return array;
+      } else {
+        for(var i = n; i > 0; i--){
+          rArray.unshift(array[i]); //depending on what is wanted, may need to chenge unshift to push
+        }
+        return rArray;
+      }
+    } else {
+      return array[array.length - 1];
+    }
   };
 
   // Call iterator(value, key, collection) for each element of collection.
