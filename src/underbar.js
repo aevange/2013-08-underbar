@@ -98,6 +98,13 @@ var _ = { };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    var rArray =[];
+    var duplicate = function(value) {
+      var val = _.indexOf(rArray, value);
+      if(val == -1)  { rArray.push(value); }    //there is probably a better way
+      return 1 + val;
+    };
+    return _.reject(array, duplicate);
   };
 
 
