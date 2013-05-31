@@ -89,7 +89,11 @@ var _ = { };
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, iterator) {
     // TIP: see if you can re-use _.select() here, without simply
-    // copying code in and modifying it
+    // copying code in and modifying it      <-is _.select() _.filter()?
+    var nIter = function(value) {
+      return !iterator(value);
+    };
+    return _.filter(collection, nIter);
   };
 
   // Produce a duplicate-free version of the array.
