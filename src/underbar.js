@@ -141,8 +141,13 @@ var _ = { };
 
   // Calls the method named by methodName on each value in the list.
   _.invoke = function(list, methodName, args) {
+    var passS = function(array) { array[methodName](); };
+    var passF = function(array) { return methodName.call(array); };
+    var whichF = (typeof methodName == 'string' ? passS: passF);
+    _.each(list, whichF);
+    return list;
   };
-
+  
   // Reduces an array or object to a single value by repetitively calling
   // iterator(previousValue, item) for each item. previousValue should be
   // the return value of the previous iterator call.
