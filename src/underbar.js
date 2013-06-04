@@ -162,10 +162,10 @@ var _ = { };
   //   }, 0); // should be 6
   //
   _.reduce = function(collection, iterator, initialValue) {
-    if(initialValue === undefined) {initialValue = 0;}
-    if(collection.length == 0) {return initialValue;}
-    var poppedVal = collection.pop();
-    return _.reduce(collection, iterator, iterator(initialValue, poppedVal));
+    var rVal = (initialValue === undefined)?0:initialValue;
+    var passedF = function(val) {rVal = iterator(rVal , val);};
+    _.each(collection, passedF);
+    return rVal;
   };
 
   // Determine if the array or object contains a given value (using `===`).
