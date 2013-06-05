@@ -142,7 +142,7 @@ var _ = { };
   // Calls the method named by methodName on each value in the list.
   _.invoke = function(list, methodName, args) {
     var passS = function(array) { array[methodName](); };
-    var passF = function(array) { methodName.call(array); };
+    var passF = function(array) { methodName.apply(array); };
     var whichF = (typeof methodName == 'string' ? passS: passF);
     _.each(list, whichF);
     return list;
