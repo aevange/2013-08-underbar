@@ -243,6 +243,13 @@ var _ = { };
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    var args = arguments.length;
+    for (var i = 1; i < args; i++) {
+      _.each (arguments[i], function(value, key) {
+        if(!obj.hasOwnProperty(key)) {obj[key] = value;}
+      });
+    };
+    return obj;
   };
 
 
