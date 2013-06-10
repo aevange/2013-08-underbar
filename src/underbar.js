@@ -321,6 +321,15 @@ var _ = { };
 
   // Shuffle an array.
   _.shuffle = function(array) {
+    var arrayLength = array.length;
+    //iincase a value is duplicated in array, create a randomly filled array of index numbers
+    var shuffledArray = [], arrayIndex = [];
+    while (arrayIndex.length < arrayLength - 1) {
+      var i = Math.floor(Math.random()*arrayLength);
+      if(!_.contains(arrayIndex, i)) { arrayIndex.push(i); }
+    }
+    _.each(arrayIndex, function(value) {shuffledArray.push(array[value])});
+    return shuffledArray;
   };
 
 
