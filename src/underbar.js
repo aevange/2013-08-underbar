@@ -398,6 +398,23 @@ var _ = { };
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    var returnArray = [];
+    var getArrayElements = function(array) {
+      var rArray = [];
+      if(Array.isArray(array)){
+        for (var i = 0; i<array.length;i++){
+          var val = array[i];
+          if(!Array.isArray(val)){
+            rArray.push(val);
+          }else{
+            rArray = rArray.concat(getArrayElements(val));
+          }
+        }
+      }
+      return rArray;
+    }
+    returnArray = returnArray.concat(getArrayElements(nestedArray));
+    return returnArray;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
