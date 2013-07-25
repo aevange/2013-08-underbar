@@ -344,6 +344,30 @@ var _ = { };
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    var sortedArray;
+    var duplicate = _.filter(collection, function(val){return true;});
+    var recursiveSearch = function(passedArray, iterator){
+      var  min, pushIndex = 0, returnArray = [];
+      _.each(passedArray, function(value, index) {
+        var thisItVal;
+        if(typeof iterator == 'string'){
+          thisItVal = value[iterator]
+        } else {
+          thisItVal = iterator(value)
+        }
+        if ((min == undefined && thisItVal != undefined) || thisItVal < min) {
+          min = thisItVal;
+          pushIndex = index;
+        }
+      });
+      returnArray = passedArray.splice(pushIndex,1);
+      if(passedArray.length > 0) {
+        returnArray = returnArray.concat(recursiveSearch(passedArray, iterator));
+      }
+      return returnArray;
+    };
+    sortedArray = recursiveSearch(duplicate, iterator);
+    return sortedArray;
   };
 
   // Zip together two or more arrays with elements of the same index
