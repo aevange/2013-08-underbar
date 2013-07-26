@@ -420,6 +420,17 @@ var _ = { };
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    var returnArray = Array.prototype.splice.call(arguments,0,1)[0];
+    for (var i = returnArray.length -1 ; i >=0; i--) {
+      var el = returnArray[i];
+      _.each(arguments, function(arg) {
+        if(!_.contains(arg, el)) {
+          var index = _.indexOf(returnArray,el);
+          returnArray.splice(index,1);
+        }
+      });
+    }
+    return returnArray;
   };
 
   // Take the difference between one array and a number of other arrays.
