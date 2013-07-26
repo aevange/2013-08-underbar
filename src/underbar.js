@@ -421,15 +421,15 @@ var _ = { };
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
     var returnArray = Array.prototype.splice.call(arguments,0,1)[0];
-    for (var i = returnArray.length -1 ; i >=0; i--) {
-      var el = returnArray[i];
-      _.each(arguments, function(arg) {
-        if(!_.contains(arg, el)) {
-          var index = _.indexOf(returnArray,el);
-          returnArray.splice(index,1);
-        }
-      });
+    var args = [];
+    for (var i = 0; i < arguments.length; i++) {
+      args.push(arguments[i]);
     }
+    _.each(args, function(arg) {
+      returnArray = _.filter(returnArray, function(val) {
+        return _.contains(arg, val);
+      })
+    });
     return returnArray;
   };
 
