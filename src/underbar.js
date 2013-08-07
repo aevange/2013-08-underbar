@@ -345,7 +345,7 @@ var _ = { };
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
     var sortedArray;
-    var duplicate = _.filter(collection, function(val){return true;});
+    var duplicate = collection.slice(0);
     var recursiveSearch = function(passedArray, iterator){
       var  min, pushIndex = 0, returnArray = [];
       _.each(passedArray, function(value, index) {
