@@ -346,16 +346,12 @@ var _ = { };
   _.sortBy = function(collection, iterator) {
     var sortedArray;
     var duplicate = collection.slice(0);
-    var recursiveSearch = function(passedArray, iterator){
+    var recursiveSearch = function(passedArray){
       var  min, pushIndex = 0, returnArray = [];
       _.each(passedArray, function(value, index) {
         var thisItVal;
-        if(typeof iterator == 'string'){
-          thisItVal = value[iterator]
-        } else {
-          thisItVal = iterator(value)
-        }
-        if ((min == undefined && thisItVal != undefined) || thisItVal < min) {
+        thisItVal = typeof iterator === 'string'? value[iterator]: iterator(value);
+        if ((min === undefined && thisItVal !== undefined) || thisItVal < min) {
           min = thisItVal;
           pushIndex = index;
         }
