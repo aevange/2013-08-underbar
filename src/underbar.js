@@ -321,6 +321,16 @@ var _ = { };
 
   // Shuffle an array.
   _.shuffle = function(array) {
+    var results = array.slice(0);
+    var randNum = function(){
+      return Math.floor(Math.random()*results.length);
+    };
+    _.each(results, function(val, index){
+      var randomIndex = randNum();
+      results[index] = results[randomIndex];
+      results[randomIndex] = val;
+    });
+    return results;
   };
 
 
