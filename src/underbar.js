@@ -346,9 +346,9 @@ var _ = { };
   _.sortBy = function(collection, iterator) {
     var sortedArray;
     var duplicate = collection.slice(0);
-    var recursiveSearch = function(passedArray){
+    var recursiveSearch = function(){
       var  min, pushIndex = 0, returnArray = [];
-      _.each(passedArray, function(value, index) {
+      _.each(duplicate, function(value, index) {
         var thisItVal;
         thisItVal = typeof iterator === 'string'? value[iterator]: iterator(value);
         if ((min === undefined && thisItVal !== undefined) || thisItVal < min) {
@@ -356,13 +356,13 @@ var _ = { };
           pushIndex = index;
         }
       });
-      returnArray = passedArray.splice(pushIndex,1);
-      if(passedArray.length > 0) {
-        returnArray = returnArray.concat(recursiveSearch(passedArray, iterator));
+      returnArray = duplicate.splice(pushIndex,1);
+      if(duplicate.length > 0) {
+        returnArray = returnArray.concat(recursiveSearch());
       }
       return returnArray;
     };
-    sortedArray = recursiveSearch(duplicate, iterator);
+    sortedArray = recursiveSearch();
     return sortedArray;
   };
 
